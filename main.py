@@ -1,6 +1,7 @@
 from typing import List, Optional
 
-from pydantic import BaseModel, EmailStr, Field, HttpUrl, PositiveInt, conlist, field_validator
+from pydantic import (BaseModel, EmailStr, Field, HttpUrl, PositiveInt,
+                      conlist, field_validator)
 
 
 class User(BaseModel):
