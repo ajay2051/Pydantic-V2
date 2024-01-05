@@ -1,6 +1,6 @@
 from typing import List, Optional
 
-from pydantic import BaseModel, EmailStr, Field, HttpUrl, PositiveInt, conlist
+from pydantic import BaseModel, EmailStr, Field, HttpUrl, PositiveInt, conlist, field_validator
 
 
 class User(BaseModel):
@@ -9,6 +9,7 @@ class User(BaseModel):
 
 
 user = User(id=124, name="Ajay")
+
 print(user)
 print(user.model_fields_set)
 print(user.model_dump())
@@ -38,6 +39,7 @@ restaurant = Restaurant(
         {"name": "Veggie Burger", "price": 8.99}
     ]
 )
+
 print(restaurant)
 print(restaurant.model_dump())
 
@@ -63,9 +65,41 @@ class Owner(BaseModel):
 
 class Restaurant(BaseModel):
     name: str = Field(..., pattern=r"^[a-zA-Z0-9-' ]+$")
-    owner = Owner
-    address = Address
+    owner: Owner
+    address: Address
     employees: conlist(Employee, min_length=2)  # conlist comes with min and max length
     no_of_seats: PositiveInt
     delivery: bool
     website: HttpUrl
+
+
+restaurant_instance = Restaurant(
+    name="Good Restaurant",
+    owner={
+        "name": "Ajay",
+        "email": "hello@gmail.com"
+    },
+    address={
+        "street": "122 Street",
+        "city": "Npj",
+        "state": "Luabind",
+        "zip_code": "46000"
+    },
+    employees=[
+        {
+            "name": "aaaaa",
+            "position": "Manager",
+            "email": "abc@gmail.com"
+        },
+        {
+            "name": "aaaaabbb",
+            "position": "Manager and Director",
+            "email": "abcd@gmail.com"
+        }
+    ],
+    no_of_seats=5,
+    delivery=True,
+    website="http://www.tastybites.com"
+)
+print(restaurant_instance)
+print(restaurant_instance.model_dump())
