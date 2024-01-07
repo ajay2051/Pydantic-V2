@@ -7,10 +7,10 @@ class Owner(BaseModel):
 
     @field_validator("name")
     @classmethod
-    def name_must_contain_space(cls, v: str) -> str:
-        if " " not in v:
+    def name_must_contain_space(cls, value: str) -> str:
+        if " " not in value:
             raise ValueError("Name must contain space")
-        return v.title()
+        return value.title()
 
 
 try:

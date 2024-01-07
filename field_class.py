@@ -60,11 +60,11 @@ class Person(BaseModel):
 
     @field_validator('birth_year')
     @classmethod
-    def validate_age(cls, v: int) -> int:
+    def validate_age(cls, value: int) -> int:
         current_year = datetime.now().year
-        if current_year - v < 18:
+        if current_year - value < 18:
             raise ValueError("Person must be 18 years old")
-        return v
+        return value
 
 
 person = Person(name="ajay", birth_year=2010)
