@@ -1,6 +1,6 @@
 from datetime import datetime, timezone
 
-from pydantic import field_serializer, BaseModel, Field
+from pydantic import BaseModel, Field, field_serializer
 
 
 class Model(BaseModel):

@@ -1,5 +1,6 @@
 import os
-from pydantic import Field, AliasChoices
+
+from pydantic import AliasChoices, Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 os.environ["PRODUCTION_AUTH_KEY"] = 'test_auth_key'
